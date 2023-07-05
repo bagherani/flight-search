@@ -1,0 +1,49 @@
+{
+  "name": "angular-chrome-extension",
+  "version": "1.0.0",
+  "author": "Lars Kniep",
+  "description": "Angular Chrome Extension Template",
+  "scripts": {
+    "ng": "ng",
+    "start": "npm run watch",
+    "build:angular": "ng build --configuration development",
+    "build:angular-production": "ng build --configuration production",
+    "watch:angular": "ng build --watch --configuration development --delete-output-path false --source-map=true --plugin ~angular/sourcemaps-plugin.js",
+    "build:chrome": "webpack --config chrome/webpack.config.js",
+    "build:chrome-production": "webpack --config chrome/webpack.config.prod.js",
+    "watch:chrome": "webpack --config chrome/webpack.config.js -w",
+    "build": "npm run clean && npm run build:angular && npm run build:chrome",
+    "build:production": "npm run build:angular-production && npm run build:chrome-production && npm run pack",
+    "watch": "npm run clean && npm-run-all --parallel watch:*",
+    "clean": "rimraf angular/dist",
+    "pack": "cd angular/dist && bestzip ../../extension-build.zip *"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^15.1.1",
+    "@angular/common": "^15.1.1",
+    "@angular/compiler": "^15.1.1",
+    "@angular/core": "^15.1.1",
+    "@angular/forms": "^15.1.1",
+    "@angular/platform-browser": "^15.1.1",
+    "@angular/platform-browser-dynamic": "^15.1.1",
+    "@angular/router": "^15.1.1",
+    "ngx-build-plus": "^15.0.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.12.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^15.1.2",
+    "@angular/cli": "~15.1.2",
+    "@angular/compiler-cli": "^15.1.1",
+    "@types/chrome": "^0.0.209",
+    "awesome-typescript-loader": "^5.2.1",
+    "bestzip": "^2.2.1",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^4.1.1",
+    "ts-loader": "^9.4.2",
+    "typescript": "~4.9.4",
+    "webpack-cli": "^5.0.1"
+  }
+}
