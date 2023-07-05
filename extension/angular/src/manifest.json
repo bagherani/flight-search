@@ -1,13 +1,13 @@
 {
   "manifest_version": 3,
-  "name": "Angular Chrome Extension",
-  "short_name": "Angular Chrome Extension",
+  "name": "Flight Query Generator",
+  "short_name": "Flight Query Generator",
   "version": "1.0.0",
-  "description": "Angular Chrome Extension scaffold project",
-  "permissions": ["tabs"],
+  "description": "Flight Query Generator scaffold project",
+  "permissions": ["activeTab"],
   "action": {
     "default_popup": "index.html?#/popup",
-    "default_title": "Angular Chrome Extension"
+    "default_title": "Flight Query Generator"
   },
   "options_page": "index.html?#/options",
   "chrome_url_overrides": {
@@ -22,5 +22,7 @@
   "background": {
     "service_worker": "serviceWorker.js"
   },
-  "content_security_policy": { "extension_pages" : "script-src 'self'; object-src 'self'" }
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }
