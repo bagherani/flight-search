@@ -2,7 +2,7 @@ import { extractFlightQuery } from "./ai";
 import { has as hasEntry, get as getEntry, set as setEntry } from "./store";
 
 const server = Bun.serve({
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3010,
   async fetch(req) {
     const requestBody = await req.text();
 
