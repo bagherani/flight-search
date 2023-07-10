@@ -1,21 +1,21 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: "popup",
+    path: 'popup',
     loadChildren: () =>
-      import("./modules/popup/popup.module").then((m) => m.PopupModule),
+      import('./modules/popup/popup.module').then(m => m.PopupModule)
   },
   {
-    path: "options",
+    path: 'options',
     loadChildren: () =>
-      import("./modules/options/options.module").then((m) => m.OptionsModule),
-  },
+      import('./modules/options/options.module').then(m => m.OptionsModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

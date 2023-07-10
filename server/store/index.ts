@@ -18,6 +18,7 @@ export function set(key: string, value: any) {
 
 export function clear() {
   const keys = Object.keys(cache);
+
   for (const key of keys) {
     delete cache[key];
   }

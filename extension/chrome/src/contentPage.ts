@@ -1,5 +1,3 @@
-chrome.runtime.onMessage.addListener(function (message) {
-  console.log("command is:", message, document.location.toString());
-});
+chrome.runtime.onMessage.addListener(function (message) {});
 
-document.addEventListener("DOMContentLoaded", function () {});
+document.addEventListener('DOMContentLoaded', function () {});
