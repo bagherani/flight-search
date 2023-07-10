@@ -1,27 +1,19 @@
-import { Component, Inject } from '@angular/core';
-import { bindCallback } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { TAB_ID } from '../../../../providers/tab-id.provider';
+import { Component, Inject } from "@angular/core";
+import { TAB_ID } from "../../../../providers/tab-id.provider";
+import { AiApi } from "src/app/services/ai-api";
 
 @Component({
-  selector: 'app-popup',
-  templateUrl: 'popup.component.html',
-  styleUrls: ['popup.component.scss']
+  selector: "app-popup",
+  templateUrl: "popup.component.html",
+  styleUrls: ["popup.component.scss"],
 })
 export class PopupComponent {
-  message: string;
+  userCommand: string = "";
 
-  constructor(@Inject(TAB_ID) readonly tabId: number) {}
+  constructor(@Inject(TAB_ID) readonly tabId: number, private aiApi: AiApi) {}
 
-  async onClick(): Promise<void> {
-    this.message = await bindCallback<any, any>(chrome.tabs.sendMessage.bind(this, this.tabId, 'request'))()
-      .pipe(
-        map(msg =>
-          chrome.runtime.lastError
-            ? 'The current page is protected by the browser, goto: https://www.google.nl and try again.'
-            : msg
-        )
-      )
-      .toPromise();
+  async handleSubmit() {
+    const response = await this.aiApi.send(this.userCommand);
+    chrome.tabs.sendMessage(this.tabId, response);
   }
 }
