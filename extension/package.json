@@ -12,11 +12,14 @@
     "build:chrome": "webpack --config chrome/webpack.config.js",
     "build:chrome-production": "webpack --config chrome/webpack.config.prod.js",
     "watch:chrome": "webpack --config chrome/webpack.config.js -w",
-    "build": "npm run clean && npm run build:angular && npm run build:chrome",
-    "build:production": "npm run build:angular-production && npm run build:chrome-production && npm run pack",
+    "build": "npm run clean && npm run build:angular && npm run build:chrome && npm run build:css",
+    "build:production": "npm run build:angular-production && npm run build:chrome-production && npm run build:css-production && npm run pack",
     "watch": "npm run clean && npm-run-all --parallel watch:*",
     "clean": "rimraf angular/dist",
-    "pack": "cd angular/dist && bestzip ../../extension-build.zip *"
+    "pack": "cd angular/dist && bestzip ../../extension-build.zip *",
+    "watch:css": "npx tailwindcss -i ./angular/src/styles.scss -o ./angular/dist/styles.css --watch",
+    "build:css": "npx tailwindcss -i ./angular/src/styles.scss -o ./angular/dist/styles.css",
+    "build:css-production": "npx tailwindcss -i ./angular/src/styles.scss -o ./angular/dist/styles.css --minify"
   },
   "private": true,
   "dependencies": {
@@ -37,13 +40,13 @@
     "@angular-devkit/build-angular": "^15.1.2",
     "@angular/cli": "~15.1.2",
     "@angular/compiler-cli": "^15.1.1",
-    "@types/chrome": "^0.0.209",
-    "awesome-typescript-loader": "^5.2.1",
+    "@types/chrome": "^0.0.239",
     "bestzip": "^2.2.1",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^4.1.1",
-    "ts-loader": "^9.4.2",
-    "typescript": "~4.9.4",
-    "webpack-cli": "^5.0.1"
+    "rimraf": "^5.0.1",
+    "tailwindcss": "^3.3.2",
+    "ts-loader": "^9.4.4",
+    "typescript": "~4.9.5",
+    "webpack-cli": "^5.1.4"
   }
 }
