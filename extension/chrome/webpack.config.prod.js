@@ -1,4 +1,3 @@
-const { CheckerPlugin } = require('awesome-typescript-loader');
 const { join } = require('path');
 const { optimize } = require('webpack');
 
@@ -21,7 +20,7 @@ module.exports = {
     path: join(__dirname, '../angular/dist'),
     filename: '[name].js'
   },
-  plugins: [new CheckerPlugin(), new optimize.AggressiveMergingPlugin()],
+  plugins: [new optimize.AggressiveMergingPlugin()],
   resolve: {
     extensions: ['.ts', '.js']
   }
