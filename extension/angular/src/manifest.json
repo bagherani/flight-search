@@ -18,10 +18,17 @@
   "options_page": "index.html?#/options",
   "content_scripts": [
     {
-      "js": ["contentPage.js"],
-      "matches": ["<all_urls>"]
+      "js": ["./contentPage.js"],
+      "css": ["./contentStyles.css"],
+      "matches": [
+        "https://*.klm.nl/*",
+        "https://*.klm.com/*",
+        "https://*.qatarairways.nl/*",
+        "https://*.qatarairways.com/*"
+      ]
     }
   ],
+  "host_permissions": ["http://localhost:*/*"],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
   }
