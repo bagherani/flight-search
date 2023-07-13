@@ -31,9 +31,7 @@
               "angular/src/assets",
               "angular/src/manifest.json"
             ],
-            "styles": [
-              "angular/src/styles.scss"
-            ],
+            "styles": ["angular/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -42,7 +40,7 @@
                 "styles": {
                   "inlineCritical": false
                 }
-              },              
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -75,7 +73,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "ngx-build-plus:dev-server",    
+          "builder": "ngx-build-plus:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "angular-chrome-extension:build:production"
