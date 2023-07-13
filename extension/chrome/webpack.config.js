@@ -1,4 +1,4 @@
-const { join } = require('path');
+const { join, resolve } = require('path');
 
 module.exports = {
   mode: 'development',
@@ -21,6 +21,10 @@ module.exports = {
   },
   plugins: [],
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    alias: {
+      [resolve(__dirname, "src/environment/environment.prod.ts")]:
+        resolve(__dirname, "src/environment/environment.ts")
+    }
   }
 };
