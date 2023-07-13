@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { AiApi } from 'src/app/services/ai-api';
 
 import { TAB_ID } from '../../../../providers/tab-id.provider';
 
@@ -11,10 +10,11 @@ import { TAB_ID } from '../../../../providers/tab-id.provider';
 export class PopupComponent {
   userCommand = '';
 
-  constructor(@Inject(TAB_ID) readonly tabId: number, private aiApi: AiApi) {}
+  constructor(@Inject(TAB_ID) readonly tabId: number) {}
 
-  async handleSubmit() {
-    const response = await this.aiApi.send(this.userCommand);
-    chrome.tabs.sendMessage(this.tabId, response);
+  async handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+
+    chrome.tabs.sendMessage(this.tabId, this.userCommand);
   }
 }

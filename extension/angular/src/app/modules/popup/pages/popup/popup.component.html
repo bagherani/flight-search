@@ -1,17 +1,17 @@
 <div class="bg-white px-6 py-8">
-  <div>
+  <form (submit)="handleSubmit($event)">
     <label class="block text-gray-700 text-sm font-bold" for="userCommand"
       >Enter your command
     </label>
     <input
-      class="shadow appearance-none mb-2 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      class="shadow appearance-none mb-2 border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
       type="text"
       id="userCommand"
       name="userCommand"
       [(ngModel)]="userCommand"
     />
     <button
-      (click)="handleSubmit()"
+      type="submit"
       class="bg-blue-500 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-2 px-4 rounded"
     >
       Submit
@@ -23,7 +23,7 @@
       <i class="rounded-full bg-red-800 w-3 h-3 inline-block"></i>
       Record
     </button>
-  </div>
+  </form>
   <div class="mt-3">
     Example:
     <p class="whitespace-nowrap italic">
