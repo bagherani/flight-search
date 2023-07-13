@@ -1,18 +1,42 @@
 import { extractFlightQuery } from './ai';
-import { has as hasEntry, get as getEntry, set as setEntry } from './store';
+import { FlightInfo } from './models';
+import {
+  has as cacheHasEntry,
+  get as cacheGetEntry,
+  set as cacheSetEntry
+} from './store';
+import { normalizeFlightInfo } from './utils/normalize-flight-info';
+
+const defaultHeaders = {
+  headers: { 'Access-Control-Allow-Origin': '*' }
+};
 
 Bun.serve({
   port: process.env.PORT || 3010,
   async fetch(req) {
-    const requestBody = await req.text();
+    if (req.url.endsWith('/flight') && req.method === 'POST') {
+      const requestBody = await req.text();
 
-    if (hasEntry(requestBody)) {
-      return Response.json(getEntry(requestBody));
+      if (requestBody && cacheHasEntry(requestBody)) {
+        return Response.json(cacheGetEntry(requestBody), defaultHeaders);
+      }
+
+      try {
+        const extractedFlightQuery = await extractFlightQuery(requestBody);
+        const flightInfo: FlightInfo = JSON.parse(
+          extractedFlightQuery.data.object
+        );
+
+        const normalizedFlightInfo = normalizeFlightInfo(flightInfo);
+
+        cacheSetEntry(requestBody, normalizedFlightInfo);
+
+        return Response.json(normalizedFlightInfo, defaultHeaders);
+      } catch (error) {
+        return Response.error();
+      }
     }
 
-    const res = extractFlightQuery(requestBody);
-    setEntry(requestBody, res);
-
-    return Response.json(res);
+    return new Response('OK', defaultHeaders);
   }
 });

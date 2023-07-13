@@ -1,16 +1,32 @@
 import { Configuration, OpenAIApi } from 'openai';
+import { resolve } from 'path';
+import { readFileSync } from 'fs';
+
+import { isDev } from '../utils/environment';
+import { mockAiResponse } from '../mocks/mock-ai-response';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
 });
 
 const openai = new OpenAIApi(configuration);
-const COMMAND_FOR_TRAINING = `Try to convert this text to a json object with these properties:\n\n
-Example:flight from Amsterdam to Rome for Jun 1st One-Way for 2 adults.\n\n
-Output:\n\n
-{from: "Amsterdam", to: "Rome", date: "01-06-2023", twoWay: false, adults: 2}\n\n`;
 
+const COMMAND_FOR_TRAINING = readFileSync(
+  resolve(import.meta.dir, 'training-model.txt'),
+  'utf8'
+);
+
+/**
+ *
+ * @throws
+ */
 export async function extractFlightQuery(userCommand: string) {
+  if (isDev) {
+    return Promise.resolve({
+      data: { object: JSON.stringify(mockAiResponse) }
+    });
+  }
+
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `${COMMAND_FOR_TRAINING}${userCommand}`,
