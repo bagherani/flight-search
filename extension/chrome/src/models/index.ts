@@ -9,3 +9,7 @@ export type FlightInfo = {
   agencyName: string;
   economy: boolean;
 };
+
+export interface IAgency {
+  getUrl: (flightInfo: FlightInfo) => string;
+}
