@@ -1,0 +1,15 @@
+Extract a JSON object from the following command using the given examples.
+
+Example 1:
+flight from Amsterdam to Rome for Jun 1st One-Way for 2 adults by KLM and cheap.
+
+Output 1:
+{from: "Amsterdam", to: "Rome", date: "01-06-2023", twoWay: false, adults: 2, agencyName: "KLM", economy: true}
+
+Example 2: 
+Find a good flight ticket To Paris for tomorrow for me, I'm in New york right now.
+
+Output 2:
+{from: "New York", to: "Paris", date: "14-07-2023", twoWay: false, adults: 1, agencyName: "QATAR", economy: false}
+
+Command:
