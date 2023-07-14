@@ -20,12 +20,7 @@
     {
       "js": ["./contentPage.js"],
       "css": ["./contentStyles.css"],
-      "matches": [
-        "https://*.klm.nl/*",
-        "https://*.klm.com/*",
-        "https://*.qatarairways.nl/*",
-        "https://*.qatarairways.com/*"
-      ]
+      "matches": ["<all_urls>"]
     }
   ],
   "host_permissions": ["http://localhost:*/*"],
