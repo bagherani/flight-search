@@ -1,14 +1,18 @@
 import {
   generateFlightURL,
-  getAgencyNameFromHostAddress
+  getAgencyNameFromHostAddress,
+  isInSupportedAgencies
 } from './utils/url-utils';
 import { AiApi } from './services/ai-api';
 import { FlightInfo } from './models';
+import { normalizeDate } from './utils/date-utils';
 
 chrome.runtime.onMessage.addListener(async message => {
-  const response = await new AiApi().send(message);
+  const flightInfo = await new AiApi().send(message);
 
-  window.location.replace(generateFlightURL(response));
+  flightInfo.date = normalizeDate(flightInfo.date, flightInfo.agencyName);
+
+  window.location.replace(generateFlightURL(flightInfo));
 });
 
 const buildUi = () => {
@@ -47,15 +51,15 @@ const buildUi = () => {
     event.preventDefault();
 
     const userCommand = input.value;
-    const response: FlightInfo = await new AiApi().send(userCommand);
+    const flightInfo: FlightInfo = await new AiApi().send(userCommand);
 
-    const flightInfo = {
-      ...response,
-      agencyName: getAgencyNameFromHostAddress(window.location.href)
-    };
+    flightInfo.agencyName = getAgencyNameFromHostAddress(window.location.href);
+    flightInfo.date = normalizeDate(flightInfo.date, flightInfo.agencyName);
 
     window.location.replace(generateFlightURL(flightInfo));
   });
 };
 
-buildUi();
+if (isInSupportedAgencies(window.location.href)) {
+  buildUi();
+}
