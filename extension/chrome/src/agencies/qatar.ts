@@ -9,7 +9,7 @@ export class QatarAgency implements IAgency {
     }&from=${flightInfo.from}&toStation=${flightInfo.toAirportCode}&to${
       flightInfo.to
     }&departingHidden=15%20Jul%202023&departing=${flightInfo.date}&adults=${
-      flightInfo.adults
+      flightInfo.adults || 1
     }&children=0&infants=0&teenager=0&ofw=0&promoCode=`;
   }
 }
