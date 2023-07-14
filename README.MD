@@ -2,7 +2,7 @@
 This extension adds a UI to the supported air carriers(right now only: KLM, AirFrance and QatarAirway) so you can type the flight you desire instead of filling a form.
 
 <video width="1280" height="928" autoplay loop muted>
-  <source src="https://raw.githubusercontent.com/bagherani/flight-search/master/assets/demo.mp4" type="video/mp4">
+  <source src="https://github.com/bagherani/flight-search/raw/main/assets/demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
