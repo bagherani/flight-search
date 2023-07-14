@@ -1,11 +1,11 @@
 import { FlightInfo } from '../models';
 
 export const mockAiResponse: FlightInfo = {
-  from: 'Tehran',
-  to: 'Paris',
-  date: '2023-09-08',
+  from: 'Amsterdam',
+  to: 'Rome',
+  date: '2023-08-01',
   adults: 1,
   twoWay: false,
-  agencyName: 'QATAR',
+  agencyName: 'KLM',
   economy: true
 };
