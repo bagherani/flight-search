@@ -5,6 +5,7 @@ This extension adds a UI to the supported air carriers(right now only: KLM, AirF
 
 # Technologies and Languages
 - OpenAi API
+- Browser Speech API
 - Bun
 - Angular
 - Typescript
@@ -29,5 +30,4 @@ Since this extension is not deployed on the google play, the only method to add 
 - Select the `dist` folder in the dialog
 
 ## Upcoming Updates
-- Voice command
 - More air carriers
